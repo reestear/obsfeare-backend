@@ -1,0 +1,57 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: ./obsfeare-server
+      dockerfile: ./build/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - static:/app/static
+  app1:
+    build:
+      context: ./obsfeare-server
+      dockerfile: ./build/Dockerfile
+    ports:
+      - "8001:8000"
+    volumes:
+      - static:/app/static
+  app2:
+    build:
+      context: ./obsfeare-server
+      dockerfile: ./build/Dockerfile
+    ports:
+      - "8002:8000"
+    volumes:
+      - static:/app/static
+  app3:
+    build:
+      context: ./obsfeare-server
+      dockerfile: ./build/Dockerfile
+    ports:
+      - "8003:8000"
+    volumes:
+      - static:/app/static
+  
+  nginx:
+    build:
+      context: ./nginx-server
+      dockerfile: ./build/Dockerfile
+    volumes:
+      - static:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+  # db:
+  #   image: postgres:12
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_DB: postgres
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+
+volumes:
+  static:
