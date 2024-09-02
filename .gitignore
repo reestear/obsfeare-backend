@@ -3,3 +3,4 @@ obsfeare-env
 */.env
 obsfeare-server/static
 obsfeare-server/db.sqlite3
+*/node_modules

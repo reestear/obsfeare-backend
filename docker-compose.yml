@@ -33,6 +33,13 @@ services:
       - "8003:8000"
     volumes:
       - static:/app/static
+
+  auth_app:
+    build: 
+      context: ./obsfeare-auth
+      dockerfile: ./build/Dockerfile
+    ports:
+      - "8080:8080"
   
   nginx:
     build:
@@ -44,6 +51,7 @@ services:
       - "80:80"
     depends_on:
       - app
+      - auth_app
   # db:
   #   image: postgres:12
   #   volumes:
