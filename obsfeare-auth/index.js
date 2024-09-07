@@ -8,7 +8,7 @@ const port = process.env.PORT;
 const mongoURI = process.env.MONGO_URI;
 
 mongoose
-  .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(mongoURI)
   .then(() => {
     app.listen(port, () => {
       console.log(`Server listening on port ${port}`);

@@ -1,6 +1,7 @@
 obsfeare-env
 .vscode
-*/.env
+*.env
 obsfeare-server/static
 obsfeare-server/db.sqlite3
-*/node_modules
+*node_modules
+*__pycache__
