@@ -7,6 +7,8 @@ from rest_framework.permissions import IsAuthenticated as DRFIsAuthenticated
 
 
 class JWTAuthentication(BaseAuthentication):
+
+    # can return only tuple of user and auth
     def authenticate(self, request):
         auth_header = request.headers.get("Authorization")
 

@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 from django.conf import settings
-from pymongo import MongoClient
-from pymongo.errors import ConnectionFailure
+from motor import motor_asyncio
+from openai import AsyncOpenAI
 
 
 class CoreConfig(AppConfig):
@@ -9,15 +9,20 @@ class CoreConfig(AppConfig):
 
     def ready(self):
         try:
-
             if settings.MONGODB["MONGO_URI"] is not None:
-                mongo_client = MongoClient(settings.MONGODB["MONGO_URI"])
+                self.mongo_client = motor_asyncio.AsyncIOMotorClient(
+                    settings.MONGODB["MONGO_URI"]
+                )
             else:
-                mongo_client = MongoClient(
+                self.mongo_client = motor_asyncio.AsyncIOMotorClient(
                     settings.MONGODB["HOST"], settings.MONGODB["PORT"]
                 )
 
-            self.mongo_db = mongo_client[settings.MONGODB["NAME"]]
+            self.mongo_db = self.mongo_client[settings.MONGODB["NAME"]]
             print("MongoDB connection successful")
-        except ConnectionFailure:
-            print("MongoDB connection failed")
+
+            openai = AsyncOpenAI(api_key=settings.OPENAI_KEY)
+            self.openai = openai
+
+        except Exception:
+            print("Setup failed to lauch")

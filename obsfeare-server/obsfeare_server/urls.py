@@ -21,4 +21,5 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("history/", include("obsfeare_server.app.urls.history_urls")),
+    path("trees/", include("obsfeare_server.app.urls.trees_urls")),
 ]

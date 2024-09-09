@@ -99,15 +99,17 @@ MONGODB = {
 # settings.py
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "obsfeare_server.app.utils.auth.JWTAuthentication",
+        "obsfeare_server.app.utils.auth_utils.JWTAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-        "obsfeare_server.app.utils.auth.IsAuthenticated",
+        "obsfeare_server.app.utils.auth_utils.IsAuthenticated",
     ],
 }
 
 # Add your public or secret key to settings
 JWT_KEY = os.getenv("JWT_KEY")
+
+OPENAI_KEY = os.getenv("OPENAI_KEY")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
